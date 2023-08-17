@@ -5,7 +5,8 @@ using System.IO;
 
 public class gameAdmin : MonoBehaviour
 {
-    public DataJSON myData;
+    public DataJSON myData = new DataJSON();
+    public CharacterController characterController;
     public Vector3 position;
     public GameObject player;
     public string filePat;
@@ -16,6 +17,8 @@ public class gameAdmin : MonoBehaviour
         filePat = Application.streamingAssetsPath + "/" + "data.json";
 
         player = GameObject.FindGameObjectWithTag("Player");
+        characterController = GetComponent<CharacterController>();
+        characterController = FindObjectOfType<CharacterController>();
     }
 
     public void LoadPlayerData()
@@ -24,9 +27,10 @@ public class gameAdmin : MonoBehaviour
         {
             string s = File.ReadAllText(filePat);
             myData = JsonUtility.FromJson<DataJSON>(s);
-            Debug.Log(myData);
+            Debug.Log("Loaded data, going to:" + s);
+            characterController.enabled = false;
             player.transform.position = myData.playerPosition;
-            pauseMenu.DesactivateMenu();
+            characterController.enabled = true;
         }
         else
         {
@@ -42,9 +46,7 @@ public class gameAdmin : MonoBehaviour
         };
 
         string s = JsonUtility.ToJson(newData);
-        Debug.Log(s);
+        Debug.Log("Save data:" + s);
         File.WriteAllText(filePat, s);
-
-        
     }
 }
