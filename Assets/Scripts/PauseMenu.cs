@@ -18,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     void Awake()
     {
         playerController = new PlayerController();
+        DesactivateMenu();
     }
 
     // Update is called once per frame

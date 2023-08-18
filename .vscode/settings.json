@@ -52,5 +52,5 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.defaultSolution": "Riesgo_Biologico.sln"
+    "dotnet.defaultSolution": "Scaperoom-Game-Programaci-n.sln"
 }
