@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class InventoryMenuController : MonoBehaviour
 {
-    public GameObject inventoryCanvas; // Asigna el Canvas del menú de inventario desde el Inspector
+    public GameObject inventoryCanvas; 
 
     void Start()
     {
-        inventoryCanvas.SetActive(false); // Inicialmente, el menú de inventario está oculto
+        inventoryCanvas.SetActive(false); 
     }
 
     void Update()
@@ -19,15 +19,15 @@ public class InventoryMenuController : MonoBehaviour
 
     void ToggleInventoryMenu()
     {
-        inventoryCanvas.SetActive(!inventoryCanvas.activeSelf); // Alternar la visibilidad del menú
+        inventoryCanvas.SetActive(!inventoryCanvas.activeSelf); 
 
         if (inventoryCanvas.activeSelf)
         {
-            Time.timeScale = 0f; // Pausar el juego
+            Time.timeScale = 0f; 
         }
         else
         {
-            Time.timeScale = 1f; // Reanudar el juego
+            Time.timeScale = 1f; 
         }
     }
 }

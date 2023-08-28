@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CloseButtonController : MonoBehaviour
 {
-    public GameObject inventoryCanvas; // Asigna el Canvas del menú de inventario desde el Inspector
+    public GameObject inventoryCanvas; 
 
     public void CloseInventory()
     {
         Debug.Log("CloseButtonController: CloseInventory method called");
-        inventoryCanvas.SetActive(false); // Ocultar el menú de inventario
-        Time.timeScale = 1f; // Reanudar el juego
+        inventoryCanvas.SetActive(false); 
+        Time.timeScale = 1f; 
     }
 }
