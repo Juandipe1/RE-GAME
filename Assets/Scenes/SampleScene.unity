@@ -270,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115420333}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017847536, y: 0.71122175, z: 0.018068893, w: 0.70250887}
+  m_LocalRotation: {x: -0.01784754, y: 0.7112218, z: 0.018068898, w: 0.7025088}
   m_LocalPosition: {x: -3.8, y: 1.05, z: -5.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5317,6 +5317,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2271999114805857691}
   - component: {fileID: 2271999114805857692}
+  - component: {fileID: 2271999114805857698}
+  - component: {fileID: 2271999114805857697}
   - component: {fileID: 2271999114805857693}
   - component: {fileID: 2271999114805857695}
   - component: {fileID: 2271999114805857696}
@@ -5541,11 +5543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityMultiplier: 2
-  isMovementPressed: 0
-  isRunPressed: 0
-  isCrouch: 0
-  isTurn180: 0
   stickMagnitude: 0
+  isTurn180: 0
 --- !u!143 &2271999114805857694
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5587,8 +5586,6 @@ MonoBehaviour:
   rotationSpeed: 10
   gravityMultiplier: 2
   cameraTransform: {fileID: 963194228}
-  isRunPressed: 0
-  isCrouch: 0
   stickMagnitude: 0
 --- !u!114 &2271999114805857696
 MonoBehaviour:
@@ -5604,6 +5601,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
   playerMovement2: {fileID: 0}
+--- !u!114 &2271999114805857697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498594237198964513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c662b2e0f9a8c44bd2c18d5ecef6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchingColliderHeight: 1.24
+  crouchingColliderCenterOffset: 0.71
+  isCrouch: 0
+--- !u!114 &2271999114805857698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498594237198964513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d7f34abd2c8db42a5d59fd8c2e1658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMovementInput: {x: 0, y: 0}
+  isMovementPressed: 0
+  isRunPressed: 0
+  isCrouch: 0
 --- !u!4 &2311733012634787592
 Transform:
   m_ObjectHideFlags: 0
