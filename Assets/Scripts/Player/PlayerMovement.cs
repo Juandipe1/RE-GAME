@@ -7,45 +7,32 @@ public class PlayerMovement : MonoBehaviour
 {
     // PlayerMovement son los controles de movimiento del jugador "Tanque"
 
+    Player player;
     PlayerController playerInput;
-    CharacterController characterController;
     Animator animator;
 
     [SerializeField]
     private float gravityMultiplier = 2f;
 
-    Vector2 currentMovementInput;
-    Vector3 currentRunMovement;
-
-    public bool isMovementPressed;
-    public bool isRunPressed;
-    public bool isCrouch;
-    public bool isTurn180;
-
     float rotationFactorPerFrame = 150f;
     float ySpeed;
     public float stickMagnitude;
 
+    public bool isTurn180;
+
     void Awake()
     {
         playerInput = new PlayerController();
-        characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        player = GetComponent<Player>();
 
-        playerInput.CharacterControl.Movement.started += onMovementInput;
-        playerInput.CharacterControl.Movement.canceled += onMovementInput;
-        playerInput.CharacterControl.Movement.performed += onMovementInput;
-        playerInput.CharacterControl.Run.started += onRun;
-        playerInput.CharacterControl.Run.canceled += onRun;
-        playerInput.CharacterControl.Crouch.started += onCrouch;
-        playerInput.CharacterControl.Crouch.canceled += onCrouch;
         playerInput.CharacterControl.Turn.started += onTurn180;
         playerInput.CharacterControl.Turn.canceled += onTurn180;
     }
 
     void Update()
     {
-        Vector2 movement = currentMovementInput;
+        Vector2 movement = player.currentMovementInput;
         Vector3 movementDirection = new Vector3(0, 0, movement.y); // Leerá solo los valores vertiales, es decir, adelante y atrás
         // Determinará el valor de inclinación de la palanca, en botones será de 1
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
@@ -61,13 +48,13 @@ public class PlayerMovement : MonoBehaviour
 
         ySpeed += gravity * Time.deltaTime;
 
-        if (!isCrouch) // Está caminando
+        if (!player.isCrouch) // Está caminando
         {
             if (movement.y > 0.25f) // Si el movimiento de la palanca o botón es mayor a ese valor irá hacia adelante
             {
                 animator.SetBool("isMoving", true); // Se activa la animación de moverse hacia adelante
 
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     // Cuando el botón de correr se activa este cambia a un valor de 2
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime);
@@ -81,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             else if (movement.y < -0.25f) // Si el movimiento es menor a ese valor el jugador caminará hacia atrás
             {
                 animator.SetBool("isMoveBack", true); // Se activa la animación de moverse atras
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime);
                 }
@@ -107,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isMovingCrouch", true);
 
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime);
                 }
@@ -119,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             else if (movement.y < -0.25f)
             {
                 animator.SetBool("isCrouchBackward", true);
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime);
                 }
@@ -136,22 +123,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void onRun(InputAction.CallbackContext context)
-    {
-        isRunPressed = context.ReadValueAsButton(); // Leerá el valor como verdadero si el botón está presionado
-    }
-
-    void onCrouch(InputAction.CallbackContext context)
-    {
-        if (context.ReadValueAsButton())
-        {
-            isCrouch = !isCrouch; // Cambiará en estado verdadero o falso cuando se oprima el botón
-        }
-    }
-
     void handleRotation()
     {
-        Vector2 movement = currentMovementInput;
+        Vector2 movement = player.currentMovementInput;
         float horizontalMovement = movement.x;
         float verticalMovement = movement.y;
 
@@ -161,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Rotate(Vector3.up, horizontalMovement * rotationFactorPerFrame * Time.deltaTime);
         }
 
-        if (Mathf.Abs(verticalMovement) < 0.25f && Mathf.Abs(horizontalMovement) > 0.1f && !isRunPressed)
+        if (Mathf.Abs(verticalMovement) < 0.25f && Mathf.Abs(horizontalMovement) > 0.1f && !player.isRunPressed)
         {
             // Si el jugador se mueve únicamente de forma horizontal se activará la animación de rotar
             if (horizontalMovement < -0.1f)
@@ -182,20 +156,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void onMovementInput(InputAction.CallbackContext context)
-    {
-        currentMovementInput = context.ReadValue<Vector2>(); // Lee los valores del input o de la palanca
-    }
-
     void onTurn180(InputAction.CallbackContext context)
     {
         isTurn180 = context.ReadValueAsButton();
 
-        if (isTurn180 && stickMagnitude > 0 && !isRunPressed)
+        if (isTurn180 && stickMagnitude > 0 && !player.isRunPressed)
         {
             animator.SetBool("isTurn180", true);
         }
-        else if (isTurn180 && isRunPressed)
+        else if (isTurn180 && player.isRunPressed)
         {
             animator.SetBool("isTurnRun", true);
         }
@@ -217,14 +186,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isTurn180", false);
         animator.SetBool("isTurnRun", false);
         animator.SetBool("isTurnIdle", false);
-    }
-
-    void handleAnimation()
-    {
-        Vector3 velocity = animator.deltaPosition;
-        velocity.y = ySpeed * Time.deltaTime;
-
-        characterController.Move(velocity);
     }
 
     private void OnEnable()

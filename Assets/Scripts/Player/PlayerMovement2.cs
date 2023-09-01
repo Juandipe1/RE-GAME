@@ -7,8 +7,7 @@ public class PlayerMovement2 : MonoBehaviour
 {
     // PlayerMovement2 son los controles de movimiento del jugador "Moderno"
 
-    PlayerController playerInput;
-    CharacterController characterController;
+    Player player;
     Animator animator;
 
     [SerializeField]
@@ -22,9 +21,6 @@ public class PlayerMovement2 : MonoBehaviour
 
     Vector2 currentMovementInput;
 
-    public bool isRunPressed;
-    public bool isCrouch;
-
     float ySpeed;
     public float stickMagnitude;
 
@@ -34,29 +30,24 @@ public class PlayerMovement2 : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        playerInput = new PlayerController();
-        characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         cameraTransform = Camera.main.transform;
 
-        playerInput.CharacterControl.Movement.started += onMovementInput;
-        playerInput.CharacterControl.Movement.canceled += onMovementInput;
-        playerInput.CharacterControl.Movement.performed += onMovementInput;
-        playerInput.CharacterControl.Run.started += onRun;
-        playerInput.CharacterControl.Run.canceled += onRun;
-        playerInput.CharacterControl.Crouch.started += onCrouch;
-        playerInput.CharacterControl.Crouch.canceled += onCrouch;
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = currentMovementInput;
+        Vector2 movement = player.currentMovementInput;
         Vector3 movementDirection = new Vector3(movement.x, 0, movement.y);
         // Determinará el valor de inclinación de la palanca, en botones será de 1
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude); 
 
         stickMagnitude = inputMagnitude; // Referencia visual en el editor de Unity para saber la mignitud de la palanca
+
+        // Update the stored cameraRotationY only when the inputs change
+        isMoving = (player.currentMovementInput != Vector2.zero);
 
         if (!isMoving)
         {
@@ -73,7 +64,7 @@ public class PlayerMovement2 : MonoBehaviour
 
         ySpeed += gravity * Time.deltaTime;
 
-        if (!isCrouch) // El personaje no está agachado
+        if (!player.isCrouch) // El personaje no está agachado
         {
             if (movementDirection != Vector3.zero) // Saber si el movimiento es un valor diferente de 0
             {
@@ -85,7 +76,7 @@ public class PlayerMovement2 : MonoBehaviour
                 Vector3 newDir = Vector3.RotateTowards(currentDir, targetDir, rotationSpeed * Time.deltaTime, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDir);
 
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     // Cuando el botón de correr se activa este cambia a un valor de 2
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime); 
@@ -118,7 +109,7 @@ public class PlayerMovement2 : MonoBehaviour
                 Vector3 newDir = Vector3.RotateTowards(currentDir, targetDir, rotationSpeed * Time.deltaTime, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDir);
 
-                if (isRunPressed)
+                if (player.isRunPressed)
                 {
                     animator.SetFloat("Input Magnitude", 2, 0.1f, Time.deltaTime);
                 }
@@ -132,36 +123,5 @@ public class PlayerMovement2 : MonoBehaviour
                 animator.SetBool("isMovingCrouch", false);
             }
         }
-    }
-
-    void onMovementInput(InputAction.CallbackContext context)
-    {
-        currentMovementInput = context.ReadValue<Vector2>(); // Lee los valores del input o de la palanca
-
-        // Update the stored cameraRotationY only when the inputs change
-        isMoving = (currentMovementInput != Vector2.zero);
-    }
-
-    void onRun(InputAction.CallbackContext context)
-    {
-        isRunPressed = context.ReadValueAsButton(); // Leerá el valor como verdadero si el botón está presionado
-    }
-
-    void onCrouch(InputAction.CallbackContext context)
-    {
-        if (context.ReadValueAsButton())
-        {
-            isCrouch = !isCrouch; // Cambiará en estado verdadero o falso cuando se oprima el botón
-        }
-    }
-
-    private void OnEnable()
-    {
-        playerInput.CharacterControl.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerInput.CharacterControl.Disable();
     }
 }
