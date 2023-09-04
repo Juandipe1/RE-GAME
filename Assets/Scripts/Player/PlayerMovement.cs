@@ -158,20 +158,23 @@ public class PlayerMovement : MonoBehaviour
 
     void onTurn180(InputAction.CallbackContext context)
     {
-        isTurn180 = context.ReadValueAsButton();
+        if (!player.isCrouch)
+        {
+            isTurn180 = context.ReadValueAsButton();
+            if (isTurn180 && stickMagnitude > 0 && !player.isRunPressed)
+            {
+                animator.SetBool("isTurn180", true);
+            }
+            else if (isTurn180 && player.isRunPressed)
+            {
+                animator.SetBool("isTurnRun", true);
+            }
+            else if (isTurn180 && stickMagnitude == 0)
+            {
+                animator.SetBool("isTurnIdle", true);
+            }
+        }
 
-        if (isTurn180 && stickMagnitude > 0 && !player.isRunPressed)
-        {
-            animator.SetBool("isTurn180", true);
-        }
-        else if (isTurn180 && player.isRunPressed)
-        {
-            animator.SetBool("isTurnRun", true);
-        }
-        else if (isTurn180 && stickMagnitude == 0)
-        {
-            animator.SetBool("isTurnIdle", true);
-        }
     }
 
     private IEnumerator WaitForAnimationToEnd()
