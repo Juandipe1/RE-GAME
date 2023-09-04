@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public bool isMovementPressed;
     public bool isRunPressed;
     public bool isCrouch;
-
+    public bool roofExists;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
         playerInput.CharacterControl.Run.canceled += onRun;
         playerInput.CharacterControl.Crouch.started += onCrouch;
         playerInput.CharacterControl.Crouch.canceled += onCrouch;
+        roofExists = false;
     }
 
     // Update is called once per frame
@@ -49,10 +50,29 @@ public class Player : MonoBehaviour
     {
         if (context.ReadValueAsButton())
         {
-            isCrouch = !isCrouch;
+
+            if (!roofExists)
+            {
+                isCrouch = !isCrouch;
+            }
+
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DontCrouch"))
+        {
+            roofExists = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("DontCrouch"))
+        {
+            roofExists = false;
+        }
+    }
     private void OnEnable()
     {
         playerInput.CharacterControl.Enable();
