@@ -12,7 +12,6 @@ public class EnemyController : MonoBehaviour
     
     private NavMeshAgent navMeshAgent;
     private Vector3 initialPosition;
-    private float idleTimer = 0f;
     private bool isChasing = false;
 
     void Start()
@@ -72,7 +71,6 @@ public class EnemyController : MonoBehaviour
         {
             // Player is out of the enemy's field of view, stop chasing and reset idle timer
             isChasing = false;
-            idleTimer = 0f;
         }
     }
 }

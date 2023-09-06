@@ -62,6 +62,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pick"",
+                    ""type"": ""Button"",
+                    ""id"": ""35346603-19ac-49fb-91d9-c9acdf235085"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af243403-47be-4ece-97ee-79d9d16b880d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dfbf1e1-6614-4879-bdf8-9cddccf58e44"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -218,6 +249,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""f18a74a2-debb-4e97-bfeb-84766b9e9286"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ae48166-f940-4b72-b9c1-fd64f4706615"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -246,6 +286,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e1a7f7c-f60a-450c-ba15-1223a4ca67a3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24e6567b-9ba8-4fb5-b408-81def430b80b"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -258,9 +320,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_CharacterControl_Run = m_CharacterControl.FindAction("Run", throwIfNotFound: true);
         m_CharacterControl_Crouch = m_CharacterControl.FindAction("Crouch", throwIfNotFound: true);
         m_CharacterControl_Turn = m_CharacterControl.FindAction("Turn", throwIfNotFound: true);
+        m_CharacterControl_Pick = m_CharacterControl.FindAction("Pick", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
+        m_Menu_Inventory = m_Menu.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,6 +390,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_Run;
     private readonly InputAction m_CharacterControl_Crouch;
     private readonly InputAction m_CharacterControl_Turn;
+    private readonly InputAction m_CharacterControl_Pick;
     public struct CharacterControlActions
     {
         private @PlayerController m_Wrapper;
@@ -334,6 +399,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_CharacterControl_Run;
         public InputAction @Crouch => m_Wrapper.m_CharacterControl_Crouch;
         public InputAction @Turn => m_Wrapper.m_CharacterControl_Turn;
+        public InputAction @Pick => m_Wrapper.m_CharacterControl_Pick;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -355,6 +421,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
+            @Pick.started += instance.OnPick;
+            @Pick.performed += instance.OnPick;
+            @Pick.canceled += instance.OnPick;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -371,6 +440,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
+            @Pick.started -= instance.OnPick;
+            @Pick.performed -= instance.OnPick;
+            @Pick.canceled -= instance.OnPick;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -393,11 +465,13 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Pause;
+    private readonly InputAction m_Menu_Inventory;
     public struct MenuActions
     {
         private @PlayerController m_Wrapper;
         public MenuActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
+        public InputAction @Inventory => m_Wrapper.m_Menu_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +484,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -417,6 +494,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -440,9 +520,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
+        void OnPick(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

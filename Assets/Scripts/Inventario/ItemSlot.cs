@@ -3,25 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class ItemSlot : MonoBehaviour, ISelectHandler
 {
     public ItemData _itemData;
-    
+
     public ItemData itemData;
     private InventoryViewController _viewController;
+    private Image _spawnedItemSprite;
 
     public void OnSelect(BaseEventData eventData)
     {
         _viewController.OnSlotSelected(this);
     }
 
-    private void Awake()
+    public bool IsEmpty()
+    {
+        return itemData == null;
+    }
+
+    private void OnEnable()
     {
         _viewController = FindObjectOfType<InventoryViewController>();
 
-        if (_itemData == null) return;
+        if (itemData == null) return;
 
-        var spawnedSprite = Instantiate<Image>(_itemData.Sprite, transform.position, Quaternion.identity, transform);
+        _spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+    }
+
+    private void OnDisable()
+    {
+        if (_spawnedItemSprite != null)
+        {
+            Destroy(_spawnedItemSprite);
+        }
     }
 }
