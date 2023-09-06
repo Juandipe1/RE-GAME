@@ -6,13 +6,19 @@ using UnityEngine.EventSystems;
 public class SelectorView : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private GameObject _firstSelection;
 
     private RectTransform _rectTransform;
     private GameObject _selected;
 
+    private void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(_firstSelection);
+    }
+
     private void Awake()
     {
-        _rectTransform = GetComponent <RectTransform>();
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     private void Update()

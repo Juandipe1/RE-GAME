@@ -8,10 +8,22 @@ using System;
 public class InventoryViewController : MonoBehaviour
 {
     [SerializeField] private GameObject _inventoryViewObject;
+    [SerializeField] private GameObject _contextMenuObject;
     [SerializeField] private TMP_Text _itemNameText;
     [SerializeField] private TMP_Text _itemDescriptionText;
-    [SerializeField] private CharacterController player;
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private List<ItemSlot> _slots;
+    [SerializeField] private ScreenFader _fader;
+
+    Player player;
+
+    private enum State
+    {
+        menuClosed,
+        menuOpen,
+    }
+
+    private State _state;
 
     private PlayerController playercontroller;
     private InputAction menu;
@@ -21,7 +33,7 @@ public class InventoryViewController : MonoBehaviour
     private void Awake()
     {
         playercontroller = new PlayerController();
-        player = FindAnyObjectByType<CharacterController>();
+        characterController = FindAnyObjectByType<CharacterController>();
     }
 
     public void OnSlotSelected(ItemSlot selectedSlot)
@@ -39,16 +51,16 @@ public class InventoryViewController : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private void OnEnable()
     {
-        EventBus.Instance.onPickUpItem += onItemPickedUp;
         menu = playercontroller.Menu.Inventory;
         menu.Enable();
 
         menu.performed += Inventory;
+        EventBus.Instance.onPickUpItem += onItemPickedUp;
     }
 
     private void OnDisable()
@@ -75,27 +87,42 @@ public class InventoryViewController : MonoBehaviour
 
         if (isPaused)
         {
-            if (_inventoryViewObject.activeSelf)
+            if (_state == State.menuClosed)
             {
-                EventBus.Instance.OpenInventory();
+                FadeToMenuCallback();
+                _fader.FadeToBlack(0.3f, FadeToMenuCallback);
+                _state = State.menuOpen;
+                characterController.enabled = false;
             }
-            else
-            {
-                EventBus.Instance.CloseInventory();
-            }
-            _inventoryViewObject.SetActive(true);
+
         }
         else
         {
-            if (_inventoryViewObject.activeSelf)
+            if (_state == State.menuOpen)
             {
-                EventBus.Instance.OpenInventory();
+                FadeFromMenuCallback();
+                _fader.FadeToBlack(0.3f, FadeFromMenuCallback);
+                _state = State.menuClosed;
+                characterController.enabled = true;
             }
-            else
-            {
-                EventBus.Instance.CloseInventory();
-            }
-            _inventoryViewObject.SetActive(false);
+
         }
+
+        if (player.isItemPickUp)
+        {
+            
+        }
+    }
+
+    private void FadeToMenuCallback()
+    {
+        _inventoryViewObject.SetActive(true);
+        _fader.FadeFromBlack(0.3f, EventBus.Instance.PauseGameplay);
+    }
+
+    private void FadeFromMenuCallback()
+    {
+        _inventoryViewObject.SetActive(false);
+        _fader.FadeFromBlack(0.3f, EventBus.Instance.ResumeGameplay);
     }
 }

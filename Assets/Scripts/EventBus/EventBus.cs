@@ -10,6 +10,8 @@ public class EventBus : MonoBehaviour
     public event Action onOpenInventory;
     public event Action onCloseInventory;
     public event Action<ItemData> onPickUpItem;
+    public event Action onGameplayPaused;
+    public event Action onGameplayResumed;
 
     public void OpenInventory()
     {
@@ -24,6 +26,16 @@ public class EventBus : MonoBehaviour
     public void PickUpItem(ItemData itemData)
     {
         onPickUpItem?.Invoke(itemData);
+    }
+
+    public void PauseGameplay()
+    {
+        onGameplayPaused?.Invoke();
+    }
+
+    public void ResumeGameplay()
+    {
+        onGameplayResumed?.Invoke();
     }
 
     private void Awake()

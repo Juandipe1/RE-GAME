@@ -86,23 +86,24 @@ public class Player : MonoBehaviour
     }
     private void OnAnimatorMove()
     {
-        Vector3 newPosition = transform.position + animator.deltaPosition;
-        Quaternion newRotation = transform.rotation * animator.deltaRotation;
+        if (characterController.enabled)
+        {
+            Vector3 newPosition = transform.position + animator.deltaPosition;
+            Quaternion newRotation = transform.rotation * animator.deltaRotation;
 
-        characterController.Move(newPosition - transform.position);
-        transform.rotation = newRotation;
+            characterController.Move(newPosition - transform.position);
+            transform.rotation = newRotation;
+        }
+    
+
     }
     private void OnEnable()
     {
         playerInput.CharacterControl.Enable();
-        EventBus.Instance.onOpenInventory += () => characterController.enabled = true;
-        EventBus.Instance.onCloseInventory += () => characterController.enabled = false;
     }
 
     private void OnDisable()
     {
         playerInput.CharacterControl.Disable();
-        EventBus.Instance.onOpenInventory += () => characterController.enabled = true;
-        EventBus.Instance.onCloseInventory += () => characterController.enabled = false;
     }
 }
