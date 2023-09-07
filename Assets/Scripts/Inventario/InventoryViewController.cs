@@ -88,8 +88,24 @@ public class InventoryViewController : MonoBehaviour
         _itemDescriptionText.SetText(selectedSlot.itemData.Description[0]);
     }
 
+    public void onPushSlot()
+    {
+        if (_state == State.menuOpen)
+        {
+            if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ItemSlot>(out var slot))
+            {
+                _state = State.contextMenu;
+                _contextMenuObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(_firstContextMenuOption);
+                foreach (var button in _contextMenuIgnore)
+                {
+                    button.interactable = false;
+                }
+            }
+        }
+    }
+
     private PlayerController playercontroller;
-    private InputAction menu;
 
     public bool isPaused;
 
@@ -102,23 +118,6 @@ public class InventoryViewController : MonoBehaviour
 
     private void Update()
     {
-        //Open context menu
-        if (player.isItemPickUp)
-        {
-            if (_state == State.menuOpen)
-            {
-                if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ItemSlot>(out var slot))
-                {
-                    _state = State.contextMenu;
-                    _contextMenuObject.SetActive(true);
-                    EventSystem.current.SetSelectedGameObject(_firstContextMenuOption);
-                    foreach (var button in _contextMenuIgnore)
-                    {
-                        button.interactable = false;
-                    }
-                }
-            }
-        }
 
         if (playercontroller.Menu.Inventory.WasPressedThisFrame())
         {
@@ -158,5 +157,14 @@ public class InventoryViewController : MonoBehaviour
         _inventoryViewObject.SetActive(false);
         characterController.enabled = true;
         _fader.FadeFromBlack(0.3f, EventBus.Instance.ResumeGameplay);
+    }
+
+    public void FadeMenuClosed()
+    {
+        if (_state == State.menuOpen)
+        {
+            _fader.FadeToBlack(0.3f, FadeFromMenuCallback);
+            _state = State.menuClosed;
+        }
     }
 }

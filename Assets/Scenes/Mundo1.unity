@@ -3872,6 +3872,34 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
       objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
       value: ItemSlotPrefab (3)
@@ -12187,6 +12215,34 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
       objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
       value: ItemSlotPrefab (1)
@@ -15439,7 +15495,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 627115379}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 828721013}
+        m_TargetAssemblyTypeName: InventoryViewController, Assembly-CSharp
+        m_MethodName: FadeMenuClosed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &627115379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16439,7 +16507,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 690593014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 828721013}
+        m_TargetAssemblyTypeName: InventoryViewController, Assembly-CSharp
+        m_MethodName: onPushSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &690593014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24936,8 +25016,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2050361365}
   - {fileID: 1759346551}
+  - {fileID: 2050361365}
   - {fileID: 1713077705}
   m_Father: {fileID: 1080428196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44861,6 +44941,34 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
       objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
       value: ItemSlotPrefab (7)
@@ -53671,6 +53779,34 @@ PrefabInstance:
     - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
@@ -63568,6 +63704,34 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
       objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
       value: ItemSlotPrefab (2)
@@ -64995,6 +65159,34 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
       objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6283562490672975321, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -65895,7 +66087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1579915752}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 828721013}
+        m_TargetAssemblyTypeName: InventoryViewController, Assembly-CSharp
+        m_MethodName: onPushSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1579915752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69467,6 +69671,34 @@ PrefabInstance:
     - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
@@ -77283,7 +77515,7 @@ GameObject:
   - component: {fileID: 1759346549}
   - component: {fileID: 1759346548}
   m_Layer: 5
-  m_Name: Inventario
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100565,6 +100797,34 @@ PrefabInstance:
     - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 828721013}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPushSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594118053841553027, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8254737131700071098, guid: c543bac2c727aea4f8c64847d32fe95b, type: 3}
       propertyPath: m_Name
