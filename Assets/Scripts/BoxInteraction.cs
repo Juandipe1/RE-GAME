@@ -31,7 +31,7 @@ public class BoxInteraction : MonoBehaviour
         {
             if (item == _requiredItem)
             {
-                DialogePrinter.Instance.PrintDialogueLine("Se ha habierto la puerta.", 0.06f, () => sceneTransition.onSceneChange());
+                DialogePrinter.Instance.PrintDialogueLine("Se ha abierto la puerta.", 0.06f, () => sceneTransition.onSceneChange());
             }
         }
     }

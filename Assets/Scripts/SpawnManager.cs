@@ -24,17 +24,17 @@ public class SpawnManager : MonoBehaviour
 
     public void SetSpwanLocation(string _location)
     {
-        spawnLocation = _location;
+        setSpawnPoint = _location;
         setPoint = true;
     }
 
-    private void OnLevelLoaded(int level)
+    private void OnLevelWasLoaded(int level)
     {
         print(spawnLocation);
         if (level > 1)
         {
             Debug.Log("Spawn at SpawnHere location");
-            Transform temp = GameObject.Find("DefaultSpawnPoint").transform;
+            Transform temp = GameObject.Find(setSpawnPoint).transform;
             Instantiate(Player, temp.position, Quaternion.identity);
             ResetLocation();
         }
