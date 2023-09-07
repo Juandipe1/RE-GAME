@@ -10,7 +10,6 @@ public class LevelLoader : MonoBehaviour
     public static void LoadLevel(string name)
     {
         nextLevel = name;
-
         SceneManager.LoadScene("Transition");
     }
 }
