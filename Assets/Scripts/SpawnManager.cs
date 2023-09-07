@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private Transform defaultPoint;
     private bool setPoint;
     private string spawnLocation = "DefaultSpawnPoint";
-    [SerializeField] private string setSpawnPoint = "";
+    private string setSpawnPoint = "";
 
     private void Awake()
     {
