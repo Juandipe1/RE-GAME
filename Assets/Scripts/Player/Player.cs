@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     PlayerController playerInput;
     public CharacterController characterController;
     public Animator animator;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         playerInput.CharacterControl.Pick.started += onPick;
         playerInput.CharacterControl.Pick.canceled += onPick;
         roofExists = false;
+        Instance = this;
     }
 
     // Update is called once per frame
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour
 
     public void onPick(InputAction.CallbackContext context)
     {
-        isItemPickUp = context.ReadValueAsButton();
+        isItemPickUp = playerInput.CharacterControl.Pick.WasPressedThisFrame();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,7 +97,7 @@ public class Player : MonoBehaviour
             characterController.Move(newPosition - transform.position);
             transform.rotation = newRotation;
         }
-    
+
 
     }
     private void OnEnable()
