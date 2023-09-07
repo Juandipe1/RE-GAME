@@ -103,10 +103,14 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerInput.CharacterControl.Enable();
+        EventBus.Instance.onGameplayPaused += () => characterController.enabled = false;
+        EventBus.Instance.onGameplayResumed += () => characterController.enabled = true;
     }
 
     private void OnDisable()
     {
         playerInput.CharacterControl.Disable();
+        EventBus.Instance.onGameplayPaused -= () => characterController.enabled = false;
+        EventBus.Instance.onGameplayResumed -= () => characterController.enabled = true;
     }
 }

@@ -7,10 +7,12 @@ public class BoxInteraction : MonoBehaviour
 {
     [SerializeField] private ItemData _requiredItem;
     private Renderer _renderer;
+    private SceneTransition sceneTransition;
 
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
+        sceneTransition = FindAnyObjectByType<SceneTransition>();
     }
 
     private void OnEnable()
@@ -29,9 +31,8 @@ public class BoxInteraction : MonoBehaviour
         {
             if (item == _requiredItem)
             {
-                _renderer.material.color = new Color(1, 0, 0, 1);
+                DialogePrinter.Instance.PrintDialogueLine("Se ha habierto la puerta.", 0.06f, () => sceneTransition.onSceneChange());
             }
         }
-
     }
 }

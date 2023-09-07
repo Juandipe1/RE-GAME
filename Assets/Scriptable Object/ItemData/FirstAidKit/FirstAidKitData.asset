@@ -16,3 +16,4 @@ MonoBehaviour:
   _description:
   - Puedo usar esto para curar mis heridas.
   _sprite: {fileID: 1187444089784855325, guid: 6f5c2fc400521194cb3b3aa28a77b32c, type: 3}
+  _worldDescription: 

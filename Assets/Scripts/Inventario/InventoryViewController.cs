@@ -11,6 +11,8 @@ public class InventoryViewController : MonoBehaviour
 {
     [SerializeField] private GameObject _inventoryViewObject;
     [SerializeField] private GameObject _contextMenuObject;
+    [SerializeField] private GameObject _yesNoPanel;
+    [SerializeField] private GameObject _itemViewPanel;
     [SerializeField] private GameObject _firstContextMenuOption;
     [SerializeField] private TMP_Text _itemNameText;
     [SerializeField] private TMP_Text _itemDescriptionText;
@@ -54,12 +56,17 @@ public class InventoryViewController : MonoBehaviour
     {
         playercontroller.Menu.Enable();
         EventBus.Instance.onPickUpItem += onItemPickedUp;
+        EventBus.Instance.onItemPrompt += onItemPrompted;
+        EventBus.Instance.onOpenInventory += OpenMenu;
     }
+
 
     private void OnDisable()
     {
         playercontroller.Menu.Disable();
         EventBus.Instance.onPickUpItem -= onItemPickedUp;
+        EventBus.Instance.onItemPrompt -= onItemPrompted;
+        EventBus.Instance.onOpenInventory -= OpenMenu;
     }
 
     private void onItemPickedUp(ItemData itemData)
@@ -72,6 +79,11 @@ public class InventoryViewController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void onItemPrompted(ItemData item)
+    {
+        var itemView = Instantiate<Image>(item.Sprite, _itemViewPanel.transform.position, Quaternion.identity, _itemViewPanel.transform);
     }
 
     public void OnSlotSelected(ItemSlot selectedSlot)
@@ -123,9 +135,7 @@ public class InventoryViewController : MonoBehaviour
         {
             if (_state == State.menuClosed)
             {
-                EventBus.Instance.PauseGameplay();
-                _fader.FadeToBlack(0.3f, FadeToMenuCallback);
-                _state = State.menuOpen;
+                OpenMenu(null);
             }
             else if (_state == State.menuOpen)
             {
@@ -145,11 +155,18 @@ public class InventoryViewController : MonoBehaviour
         }
     }
 
-    private void FadeToMenuCallback()
+    private void OpenMenu(Action finishedCallback)
+    {
+        EventBus.Instance.PauseGameplay();
+        _fader.FadeToBlack(0.3f, () => FadeToMenuCallback(finishedCallback));
+        _state = State.menuOpen;
+    }
+
+    private void FadeToMenuCallback(Action finishedCallback)
     {
         _inventoryViewObject.SetActive(true);
         characterController.enabled = false;
-        _fader.FadeFromBlack(0.3f, null);
+        _fader.FadeFromBlack(0.3f, finishedCallback);
     }
 
     private void FadeFromMenuCallback()

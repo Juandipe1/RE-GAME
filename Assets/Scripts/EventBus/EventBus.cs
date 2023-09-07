@@ -7,16 +7,17 @@ public class EventBus : MonoBehaviour
 {
     public static EventBus Instance { get; private set; }
 
-    public event Action onOpenInventory;
+    public event Action<Action> onOpenInventory;
     public event Action onCloseInventory;
     public event Action<ItemData> onPickUpItem;
     public event Action onGameplayPaused;
     public event Action onGameplayResumed;
     public event Action<ItemData> onItemUsed;
+    public event Action<ItemData> onItemPrompt;
 
-    public void OpenInventory()
+    public void OpenInventory(Action finishedCallback)
     {
-        onOpenInventory?.Invoke();
+        onOpenInventory?.Invoke(finishedCallback);
     }
     
     public void CloseInventory()
@@ -47,5 +48,10 @@ public class EventBus : MonoBehaviour
     public void UseItem(ItemData item)
     {
         onItemUsed?.Invoke(item);
+    }
+
+    public void PrompItemPickUp(ItemData item)
+    {
+        onItemPrompt?.Invoke(item);
     }
 }

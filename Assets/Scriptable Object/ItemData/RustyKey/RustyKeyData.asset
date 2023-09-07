@@ -17,3 +17,4 @@ MonoBehaviour:
   - Esta llave estaba guardada en mis bolsillos. La puedo usar para abrir alguna
     puerta.
   _sprite: {fileID: 3673845069750096802, guid: ad346db94a91a8249bb4b97ced8e33cb, type: 3}
+  _worldDescription: "Toma esta llave, lo usar\xE1s para abrir esa puerta."
