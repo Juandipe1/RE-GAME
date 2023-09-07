@@ -12,6 +12,7 @@ public class EventBus : MonoBehaviour
     public event Action<ItemData> onPickUpItem;
     public event Action onGameplayPaused;
     public event Action onGameplayResumed;
+    public event Action<ItemData> onItemUsed;
 
     public void OpenInventory()
     {
@@ -43,4 +44,8 @@ public class EventBus : MonoBehaviour
         Instance = this;
     }
 
+    public void UseItem(ItemData item)
+    {
+        onItemUsed?.Invoke(item);
+    }
 }
